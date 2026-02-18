@@ -1,0 +1,527 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00CEBA1CE6648395F0E5DEA6 /* TrackedPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A3A2F1105D078BD659921E /* TrackedPerson.swift */; };
+		020F7DE94768519BC8A44F7E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA9E7599987CB12F06DE592 /* ContentView.swift */; };
+		03A0095283592DB9CD5E65E8 /* SummaryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C740FEAA78C32C9FE136C6DD /* SummaryCardView.swift */; };
+		0D8050E9B82D0187FCAF9DCD /* SystemConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A72FD91C9639803F55520F /* SystemConnection.swift */; };
+		13BB3BAAF240D1C5FD901ADB /* SSOAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377A9D197BB64C9CD2E9EB6 /* SSOAuthService.swift */; };
+		1425E26CBE309C8568E3B51F /* JiraSummaryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE86BD8E553DC2CECEFE4F /* JiraSummaryApp.swift */; };
+		1E037F3BA0B73AA85E67C2D5 /* PersonSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C2A9FF5DB2AAABC873A817 /* PersonSummary.swift */; };
+		273E73F8CBDC62A71AC42DD9 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22C423047962F8C75F06A94 /* DashboardView.swift */; };
+		2A62967BB93A0F5E9A7121CC /* SprintData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC5A60880C8378D64E4A42 /* SprintData.swift */; };
+		2D8DBA7205E702004B3120C9 /* JiraCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B032523828F3D8B8EC86C34 /* JiraCloudService.swift */; };
+		4120785CFAB045EFB9E2B99A /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901FE99398A55084B41EDEAC /* AddPersonView.swift */; };
+		43223BD142ADCDAD84CE4F6F /* ActivityTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CC49BC1C167CC5CD25BF08 /* ActivityTimelineView.swift */; };
+		477ABCBFB0D93E8B6DBA426E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEBBF59DAEC3F9634ABBA2F /* SettingsView.swift */; };
+		4C759FF497F8BD70C3EFAE8C /* TicketActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F9679092966C49BC35A6F /* TicketActivity.swift */; };
+		4E6B0FF9EB27AE745AD552FD /* MenuBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF40329E2CBB28326307540 /* MenuBarManager.swift */; };
+		678E9A68AF2194BB0ECB88B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3601B238FD7B05CA1BA449C3 /* Assets.xcassets */; };
+		6DE358832F034C6B81275479 /* TicketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFF52366800E8D6147C793C /* TicketListView.swift */; };
+		7DF33EFC8F9ECDD4E369A628 /* SummaryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */; };
+		967E52BA4121C0A5DFB8BC24 /* AzureDevOpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B733842167E09960E15FA /* AzureDevOpsService.swift */; };
+		9836ADDA03A006D90F24B5CB /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC71A0DB7BD83F4CA7E3C /* PeopleListView.swift */; };
+		A248CD7AEEF79AC78A9D748F /* SSOWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C68E639237390DD679685A /* SSOWebView.swift */; };
+		AADC0EBE06B2EB8918C3F8FB /* JiraServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4107E6D2A9A5189EAB2545 /* JiraServerService.swift */; };
+		AB464EC964E0DB949CF24DA2 /* AddSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB1A3087F7C326347EF096 /* AddSystemView.swift */; };
+		B49C91CA70D1BFC6296C4787 /* DataFetchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8D03091CCB6EA8B24BC62 /* DataFetchCoordinator.swift */; };
+		C19E06A059FD2CAEAD4FB603 /* JiraModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9173E04FAA00BB152CE13924 /* JiraModels.swift */; };
+		CCF58E1E861319D8C13A0040 /* AISummaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63972915C7F99BBB5C74E660 /* AISummaryService.swift */; };
+		D5A2930A6026A95ADFFF85ED /* SystemsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FA776D3E8F84C2CEBACEC4 /* SystemsListView.swift */; };
+		DE42298C17C44C7C81318412 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2EACCC9E871F5D7441848F /* DataStore.swift */; };
+		F09F10951B0AE095CA6F4AE3 /* SprintVelocityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E068DC8539529A4BFA6F61F /* SprintVelocityView.swift */; };
+		F166E0BE50CBFB813F039D42 /* AzureDevOpsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A530001E25E277F1B969D8C6 /* AzureDevOpsModels.swift */; };
+		F33B9A375B9C605294CC3540 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C2146BC31690B2FE5DBCB5 /* KeychainService.swift */; };
+		F6C8EC7A40839CE7379A29E5 /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBE9AEFFFBD956543080D4A /* PersonDetailView.swift */; };
+		FB24F84B8C5F167B83CBD979 /* ModernDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D5886A997431FBE5BE4995 /* ModernDesign.swift */; };
+		FD271622149C64EE6EB310E2 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5474B20D5A99D1266C9BF5FD /* SidebarView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEngine.swift; sourceTree = "<group>"; };
+		1A4107E6D2A9A5189EAB2545 /* JiraServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraServerService.swift; sourceTree = "<group>"; };
+		2EBB1A3087F7C326347EF096 /* AddSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSystemView.swift; sourceTree = "<group>"; };
+		3470DDE57D36266FD1D45E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3601B238FD7B05CA1BA449C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		36CC49BC1C167CC5CD25BF08 /* ActivityTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTimelineView.swift; sourceTree = "<group>"; };
+		38A7B5737D0B76C737CAB38B /* JiraSummary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiraSummary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		503B733842167E09960E15FA /* AzureDevOpsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDevOpsService.swift; sourceTree = "<group>"; };
+		5474B20D5A99D1266C9BF5FD /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		5AA9E7599987CB12F06DE592 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5EBE9AEFFFBD956543080D4A /* PersonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailView.swift; sourceTree = "<group>"; };
+		63972915C7F99BBB5C74E660 /* AISummaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISummaryService.swift; sourceTree = "<group>"; };
+		68C2146BC31690B2FE5DBCB5 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		6BFF52366800E8D6147C793C /* TicketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketListView.swift; sourceTree = "<group>"; };
+		73DE86BD8E553DC2CECEFE4F /* JiraSummaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSummaryApp.swift; sourceTree = "<group>"; };
+		79DC5A60880C8378D64E4A42 /* SprintData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintData.swift; sourceTree = "<group>"; };
+		80F8D03091CCB6EA8B24BC62 /* DataFetchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetchCoordinator.swift; sourceTree = "<group>"; };
+		8377A9D197BB64C9CD2E9EB6 /* SSOAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOAuthService.swift; sourceTree = "<group>"; };
+		8B032523828F3D8B8EC86C34 /* JiraCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraCloudService.swift; sourceTree = "<group>"; };
+		8E068DC8539529A4BFA6F61F /* SprintVelocityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintVelocityView.swift; sourceTree = "<group>"; };
+		901FE99398A55084B41EDEAC /* AddPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonView.swift; sourceTree = "<group>"; };
+		9173E04FAA00BB152CE13924 /* JiraModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraModels.swift; sourceTree = "<group>"; };
+		924F9679092966C49BC35A6F /* TicketActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketActivity.swift; sourceTree = "<group>"; };
+		9FEBBF59DAEC3F9634ABBA2F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A22C423047962F8C75F06A94 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		A530001E25E277F1B969D8C6 /* AzureDevOpsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDevOpsModels.swift; sourceTree = "<group>"; };
+		C4C2A9FF5DB2AAABC873A817 /* PersonSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSummary.swift; sourceTree = "<group>"; };
+		C6A3A2F1105D078BD659921E /* TrackedPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedPerson.swift; sourceTree = "<group>"; };
+		C740FEAA78C32C9FE136C6DD /* SummaryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCardView.swift; sourceTree = "<group>"; };
+		CA2EACCC9E871F5D7441848F /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		D3C68E639237390DD679685A /* SSOWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOWebView.swift; sourceTree = "<group>"; };
+		D3FA776D3E8F84C2CEBACEC4 /* SystemsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemsListView.swift; sourceTree = "<group>"; };
+		D9A72FD91C9639803F55520F /* SystemConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemConnection.swift; sourceTree = "<group>"; };
+		DAF40329E2CBB28326307540 /* MenuBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarManager.swift; sourceTree = "<group>"; };
+		E3ECC71A0DB7BD83F4CA7E3C /* PeopleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
+		F0D5886A997431FBE5BE4995 /* ModernDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernDesign.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0BB029A5ADC33F3BE2D4F200 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				63972915C7F99BBB5C74E660 /* AISummaryService.swift */,
+				503B733842167E09960E15FA /* AzureDevOpsService.swift */,
+				80F8D03091CCB6EA8B24BC62 /* DataFetchCoordinator.swift */,
+				CA2EACCC9E871F5D7441848F /* DataStore.swift */,
+				8B032523828F3D8B8EC86C34 /* JiraCloudService.swift */,
+				1A4107E6D2A9A5189EAB2545 /* JiraServerService.swift */,
+				68C2146BC31690B2FE5DBCB5 /* KeychainService.swift */,
+				DAF40329E2CBB28326307540 /* MenuBarManager.swift */,
+				8377A9D197BB64C9CD2E9EB6 /* SSOAuthService.swift */,
+				0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		423C2F6901DA5AFE448EF383 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A530001E25E277F1B969D8C6 /* AzureDevOpsModels.swift */,
+				9173E04FAA00BB152CE13924 /* JiraModels.swift */,
+				C4C2A9FF5DB2AAABC873A817 /* PersonSummary.swift */,
+				79DC5A60880C8378D64E4A42 /* SprintData.swift */,
+				D9A72FD91C9639803F55520F /* SystemConnection.swift */,
+				924F9679092966C49BC35A6F /* TicketActivity.swift */,
+				C6A3A2F1105D078BD659921E /* TrackedPerson.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		876CA105F785E3B3D73C2C01 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				38A7B5737D0B76C737CAB38B /* JiraSummary.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87C5EFA3AAD176C3BFD3B7BE /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				5474B20D5A99D1266C9BF5FD /* SidebarView.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		8A8C6AEC8678DA71A5887AA7 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				A22C423047962F8C75F06A94 /* DashboardView.swift */,
+				C740FEAA78C32C9FE136C6DD /* SummaryCardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		ADD1D097F6A42C07C137AC8F /* Systems */ = {
+			isa = PBXGroup;
+			children = (
+				2EBB1A3087F7C326347EF096 /* AddSystemView.swift */,
+				D3C68E639237390DD679685A /* SSOWebView.swift */,
+				D3FA776D3E8F84C2CEBACEC4 /* SystemsListView.swift */,
+			);
+			path = Systems;
+			sourceTree = "<group>";
+		};
+		C18F9029CD3B17DD65E159E1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5AA9E7599987CB12F06DE592 /* ContentView.swift */,
+				CFF5F1094010E184188B6886 /* Activity */,
+				8A8C6AEC8678DA71A5887AA7 /* Dashboard */,
+				CEFC8FD9D356C17A0218F849 /* People */,
+				ECA99F34115807A5453E72C6 /* Settings */,
+				87C5EFA3AAD176C3BFD3B7BE /* Sidebar */,
+				ADD1D097F6A42C07C137AC8F /* Systems */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CEFC8FD9D356C17A0218F849 /* People */ = {
+			isa = PBXGroup;
+			children = (
+				901FE99398A55084B41EDEAC /* AddPersonView.swift */,
+				E3ECC71A0DB7BD83F4CA7E3C /* PeopleListView.swift */,
+				5EBE9AEFFFBD956543080D4A /* PersonDetailView.swift */,
+			);
+			path = People;
+			sourceTree = "<group>";
+		};
+		CFF5F1094010E184188B6886 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				36CC49BC1C167CC5CD25BF08 /* ActivityTimelineView.swift */,
+				8E068DC8539529A4BFA6F61F /* SprintVelocityView.swift */,
+				6BFF52366800E8D6147C793C /* TicketListView.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		DC17F7B8A1400966642F786D /* JiraSummary */ = {
+			isa = PBXGroup;
+			children = (
+				3601B238FD7B05CA1BA449C3 /* Assets.xcassets */,
+				3470DDE57D36266FD1D45E29 /* Info.plist */,
+				73DE86BD8E553DC2CECEFE4F /* JiraSummaryApp.swift */,
+				EA281207A32C017454E00185 /* Design */,
+				423C2F6901DA5AFE448EF383 /* Models */,
+				0BB029A5ADC33F3BE2D4F200 /* Services */,
+				C18F9029CD3B17DD65E159E1 /* Views */,
+			);
+			path = JiraSummary;
+			sourceTree = "<group>";
+		};
+		EA281207A32C017454E00185 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				F0D5886A997431FBE5BE4995 /* ModernDesign.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		ECA99F34115807A5453E72C6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9FEBBF59DAEC3F9634ABBA2F /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		EE20CECB2E5DD03844EFC5A2 = {
+			isa = PBXGroup;
+			children = (
+				DC17F7B8A1400966642F786D /* JiraSummary */,
+				876CA105F785E3B3D73C2C01 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18129440F2A4C841EC3BFE57 /* JiraSummary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0989397BF43212E632B60AC3 /* Build configuration list for PBXNativeTarget "JiraSummary" */;
+			buildPhases = (
+				31D10DCD672FBD052EE888F9 /* Sources */,
+				23170D004731DFC1BE8EC65E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JiraSummary;
+			packageProductDependencies = (
+			);
+			productName = JiraSummary;
+			productReference = 38A7B5737D0B76C737CAB38B /* JiraSummary.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9399050F5B905CE19EB503CA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					18129440F2A4C841EC3BFE57 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = FBCEC2A3687D937E3DAF19E7 /* Build configuration list for PBXProject "JiraSummary" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EE20CECB2E5DD03844EFC5A2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18129440F2A4C841EC3BFE57 /* JiraSummary */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		23170D004731DFC1BE8EC65E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				678E9A68AF2194BB0ECB88B2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		31D10DCD672FBD052EE888F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCF58E1E861319D8C13A0040 /* AISummaryService.swift in Sources */,
+				43223BD142ADCDAD84CE4F6F /* ActivityTimelineView.swift in Sources */,
+				4120785CFAB045EFB9E2B99A /* AddPersonView.swift in Sources */,
+				AB464EC964E0DB949CF24DA2 /* AddSystemView.swift in Sources */,
+				F166E0BE50CBFB813F039D42 /* AzureDevOpsModels.swift in Sources */,
+				967E52BA4121C0A5DFB8BC24 /* AzureDevOpsService.swift in Sources */,
+				020F7DE94768519BC8A44F7E /* ContentView.swift in Sources */,
+				273E73F8CBDC62A71AC42DD9 /* DashboardView.swift in Sources */,
+				B49C91CA70D1BFC6296C4787 /* DataFetchCoordinator.swift in Sources */,
+				DE42298C17C44C7C81318412 /* DataStore.swift in Sources */,
+				2D8DBA7205E702004B3120C9 /* JiraCloudService.swift in Sources */,
+				C19E06A059FD2CAEAD4FB603 /* JiraModels.swift in Sources */,
+				AADC0EBE06B2EB8918C3F8FB /* JiraServerService.swift in Sources */,
+				1425E26CBE309C8568E3B51F /* JiraSummaryApp.swift in Sources */,
+				F33B9A375B9C605294CC3540 /* KeychainService.swift in Sources */,
+				4E6B0FF9EB27AE745AD552FD /* MenuBarManager.swift in Sources */,
+				FB24F84B8C5F167B83CBD979 /* ModernDesign.swift in Sources */,
+				9836ADDA03A006D90F24B5CB /* PeopleListView.swift in Sources */,
+				F6C8EC7A40839CE7379A29E5 /* PersonDetailView.swift in Sources */,
+				1E037F3BA0B73AA85E67C2D5 /* PersonSummary.swift in Sources */,
+				13BB3BAAF240D1C5FD901ADB /* SSOAuthService.swift in Sources */,
+				A248CD7AEEF79AC78A9D748F /* SSOWebView.swift in Sources */,
+				477ABCBFB0D93E8B6DBA426E /* SettingsView.swift in Sources */,
+				FD271622149C64EE6EB310E2 /* SidebarView.swift in Sources */,
+				2A62967BB93A0F5E9A7121CC /* SprintData.swift in Sources */,
+				F09F10951B0AE095CA6F4AE3 /* SprintVelocityView.swift in Sources */,
+				03A0095283592DB9CD5E65E8 /* SummaryCardView.swift in Sources */,
+				7DF33EFC8F9ECDD4E369A628 /* SummaryEngine.swift in Sources */,
+				0D8050E9B82D0187FCAF9DCD /* SystemConnection.swift in Sources */,
+				D5A2930A6026A95ADFFF85ED /* SystemsListView.swift in Sources */,
+				4C759FF497F8BD70C3EFAE8C /* TicketActivity.swift in Sources */,
+				6DE358832F034C6B81275479 /* TicketListView.swift in Sources */,
+				00CEBA1CE6648395F0E5DEA6 /* TrackedPerson.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		061FC4D06AA60328C636F7E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		335B1B496C5B7DD0293D0960 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		4791C5D6FAC83AEB91C9D3BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_ENTITLEMENTS = JiraSummary/JiraSummary.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = JiraSummary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jordankoch.JiraSummary;
+				PRODUCT_NAME = JiraSummary;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9B03056A4C6E4808C8DAA33D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_ENTITLEMENTS = JiraSummary/JiraSummary.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = JiraSummary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jordankoch.JiraSummary;
+				PRODUCT_NAME = JiraSummary;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0989397BF43212E632B60AC3 /* Build configuration list for PBXNativeTarget "JiraSummary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4791C5D6FAC83AEB91C9D3BB /* Debug */,
+				9B03056A4C6E4808C8DAA33D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FBCEC2A3687D937E3DAF19E7 /* Build configuration list for PBXProject "JiraSummary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				335B1B496C5B7DD0293D0960 /* Debug */,
+				061FC4D06AA60328C636F7E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9399050F5B905CE19EB503CA /* Project object */;
+}

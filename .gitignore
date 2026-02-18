@@ -1,0 +1,48 @@
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.app
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+# Build
+build/
+*.o
+*.d
+
+# CocoaPods
+Pods/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Xcodegen
+# Keep project.yml, ignore generated xcodeproj contents
+# JiraSummary.xcodeproj/ -- keep this
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Secrets
+*.p12
+*.cer
+*.mobileprovision
+secrets.json
+credentials.json
+.env
+config.plist
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
