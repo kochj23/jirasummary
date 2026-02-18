@@ -1,0 +1,389 @@
+//
+//  AIBackendManager.swift
+//  JiraSummary
+//
+//  Centralized AI backend detection and management
+//  Supports local (Ollama, MLX, TinyLLM, TinyChat, OpenWebUI) and
+//  cloud (OpenAI, Google Cloud, Azure, AWS, IBM Watson) backends.
+//  Matches Blompie AI infrastructure pattern.
+//  Created by Jordan Koch on 2026-02-17.
+//
+
+import Foundation
+import os.log
+import Observation
+
+enum AIBackend: String, CaseIterable, Codable, Identifiable {
+    case ollama = "Ollama"
+    case mlx = "MLX"
+    case tinyLLM = "TinyLLM"
+    case tinyChat = "TinyChat"
+    case openWebUI = "OpenWebUI"
+    case openAI = "OpenAI"
+    case googleCloud = "Google Cloud"
+    case azure = "Azure"
+    case aws = "AWS"
+    case ibmWatson = "IBM Watson"
+
+    var id: String { rawValue }
+
+    var isLocal: Bool {
+        switch self {
+        case .ollama, .mlx, .tinyLLM, .tinyChat, .openWebUI: return true
+        case .openAI, .googleCloud, .azure, .aws, .ibmWatson: return false
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .ollama: return "brain"
+        case .mlx: return "cpu"
+        case .tinyLLM: return "memorychip"
+        case .tinyChat: return "bubble.left.fill"
+        case .openWebUI: return "globe"
+        case .openAI: return "sparkles"
+        case .googleCloud: return "cloud.fill"
+        case .azure: return "cloud.bolt.fill"
+        case .aws: return "cloud.sun.fill"
+        case .ibmWatson: return "wand.and.stars"
+        }
+    }
+
+    var defaultURL: String {
+        switch self {
+        case .ollama: return "http://localhost:11434"
+        case .mlx: return ""
+        case .tinyLLM: return "http://localhost:8000"
+        case .tinyChat: return "http://localhost:8000"
+        case .openWebUI: return "http://localhost:8080"
+        case .openAI: return "https://api.openai.com"
+        case .googleCloud: return "https://generativelanguage.googleapis.com"
+        case .azure: return ""
+        case .aws: return ""
+        case .ibmWatson: return ""
+        }
+    }
+}
+
+@MainActor
+@Observable
+final class AIBackendManager {
+    static let shared = AIBackendManager()
+
+    // MARK: - Published State
+
+    var activeBackend: AIBackend = .ollama
+    var isEnabled = false
+
+    // Backend availability
+    var isOllamaAvailable = false
+    var isMLXAvailable = false
+    var isTinyLLMAvailable = false
+    var isTinyChatAvailable = false
+    var isOpenWebUIAvailable = false
+
+    // Model management
+    var ollamaModels: [String] = []
+    var selectedOllamaModel: String = "llama3"
+
+    // Configuration
+    var ollamaServerURL: String = "http://localhost:11434"
+    var tinyLLMServerURL: String = "http://localhost:8000"
+    var tinyChatServerURL: String = "http://localhost:8000"
+    var openWebUIServerURL: String = "http://localhost:8080"
+
+    // Cloud API keys
+    var openAIKey: String = ""
+    var googleCloudKey: String = ""
+    var azureKey: String = ""
+    var azureEndpoint: String = ""
+    var awsAccessKey: String = ""
+    var awsSecretKey: String = ""
+    var awsRegion: String = "us-east-1"
+    var ibmKey: String = ""
+    var ibmURL: String = ""
+
+    // Generation parameters
+    var temperature: Double = 0.3
+    var maxTokens: Int = 300
+
+    // Usage tracking
+    var usageStats: UsageStats = UsageStats()
+    var performanceMetrics: [AIBackend: PerformanceMetrics] = [:]
+    var connectionTestResults: [AIBackend: ConnectionTestResult] = [:]
+
+    let logger = Logger(subsystem: "com.jordankoch.JiraSummary", category: "AIBackend")
+    private var monitoringTask: Task<Void, Never>?
+
+    // MARK: - Init
+
+    private init() {
+        loadConfiguration()
+        Task { await refreshAllBackends() }
+    }
+
+    // MARK: - Availability Checks
+
+    func refreshAllBackends() async {
+        async let ollama = checkOllama()
+        async let mlx = checkMLX()
+        async let tiny = checkTinyLLM()
+        async let chat = checkTinyChat()
+        async let webui = checkOpenWebUI()
+
+        let results = await (ollama, mlx, tiny, chat, webui)
+        isOllamaAvailable = results.0
+        isMLXAvailable = results.1
+        isTinyLLMAvailable = results.2
+        isTinyChatAvailable = results.3
+        isOpenWebUIAvailable = results.4
+
+        if isOllamaAvailable {
+            await fetchOllamaModels()
+        }
+
+        logger.info("Backend refresh: Ollama=\(self.isOllamaAvailable), MLX=\(self.isMLXAvailable), TinyLLM=\(self.isTinyLLMAvailable), TinyChat=\(self.isTinyChatAvailable), OpenWebUI=\(self.isOpenWebUIAvailable)")
+    }
+
+    func isAvailable(_ backend: AIBackend) -> Bool {
+        switch backend {
+        case .ollama: return isOllamaAvailable
+        case .mlx: return isMLXAvailable
+        case .tinyLLM: return isTinyLLMAvailable
+        case .tinyChat: return isTinyChatAvailable
+        case .openWebUI: return isOpenWebUIAvailable
+        case .openAI: return !openAIKey.isEmpty
+        case .googleCloud: return !googleCloudKey.isEmpty
+        case .azure: return !azureKey.isEmpty && !azureEndpoint.isEmpty
+        case .aws: return !awsAccessKey.isEmpty && !awsSecretKey.isEmpty
+        case .ibmWatson: return !ibmKey.isEmpty && !ibmURL.isEmpty
+        }
+    }
+
+    var anyBackendAvailable: Bool {
+        AIBackend.allCases.contains { isAvailable($0) }
+    }
+
+    var availableBackends: [AIBackend] {
+        AIBackend.allCases.filter { isAvailable($0) }
+    }
+
+    // MARK: - Individual Backend Checks
+
+    private func checkOllama() async -> Bool {
+        await checkHTTPEndpoint(urlString: "\(ollamaServerURL)/api/tags")
+    }
+
+    private func checkTinyLLM() async -> Bool {
+        await checkHTTPEndpoint(urlString: "\(tinyLLMServerURL)/health")
+    }
+
+    private func checkTinyChat() async -> Bool {
+        await checkHTTPEndpoint(urlString: "\(tinyChatServerURL)/api/chat")
+    }
+
+    private func checkOpenWebUI() async -> Bool {
+        await checkHTTPEndpoint(urlString: "\(openWebUIServerURL)/api/chat")
+    }
+
+    private func checkMLX() async -> Bool {
+        FileManager.default.fileExists(atPath: "/usr/local/bin/mlx_lm") ||
+        FileManager.default.fileExists(atPath: "/opt/homebrew/bin/mlx_lm")
+    }
+
+    private func checkHTTPEndpoint(urlString: String) async -> Bool {
+        guard let url = URL(string: urlString) else { return false }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5
+        do {
+            let (_, response) = try await URLSession.shared.data(for: request)
+            return (response as? HTTPURLResponse)?.statusCode == 200
+        } catch {
+            return false
+        }
+    }
+
+    // MARK: - Model Management
+
+    func fetchOllamaModels() async {
+        guard let url = URL(string: "\(ollamaServerURL)/api/tags") else { return }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            struct TagsResponse: Decodable {
+                struct Model: Decodable { let name: String }
+                let models: [Model]?
+            }
+            let response = try JSONDecoder().decode(TagsResponse.self, from: data)
+            ollamaModels = response.models?.map { $0.name } ?? []
+            if !ollamaModels.contains(selectedOllamaModel), let first = ollamaModels.first {
+                selectedOllamaModel = first
+            }
+            logger.info("Fetched \(self.ollamaModels.count) Ollama models")
+        } catch {
+            logger.error("Failed to fetch Ollama models: \(error.localizedDescription)")
+        }
+    }
+
+    // MARK: - Connection Testing
+
+    func testConnection(for backend: AIBackend) async -> ConnectionTestResult {
+        let start = Date()
+        var result = ConnectionTestResult(backend: backend)
+
+        do {
+            let testPrompt = "Reply with exactly: OK"
+            _ = try await generate(prompt: testPrompt, using: backend, maxTokens: 10)
+            result.responseTime = Date().timeIntervalSince(start)
+            result.isSuccess = true
+            result.message = String(format: "Connected (%.1fs)", result.responseTime ?? 0)
+        } catch {
+            result.responseTime = Date().timeIntervalSince(start)
+            result.isSuccess = false
+            result.message = error.localizedDescription
+        }
+
+        connectionTestResults[backend] = result
+        return result
+    }
+
+    // MARK: - Background Monitoring
+
+    func startBackgroundMonitoring(interval: TimeInterval = 60) {
+        stopBackgroundMonitoring()
+        monitoringTask = Task {
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(interval))
+                if Task.isCancelled { break }
+                await refreshAllBackends()
+            }
+        }
+    }
+
+    func stopBackgroundMonitoring() {
+        monitoringTask?.cancel()
+        monitoringTask = nil
+    }
+
+    // MARK: - Configuration Persistence
+
+    func saveConfiguration() {
+        let defaults = UserDefaults.standard
+        defaults.set(activeBackend.rawValue, forKey: "AIBackend_Active")
+        defaults.set(isEnabled, forKey: "AIBackend_Enabled")
+        defaults.set(selectedOllamaModel, forKey: "AIBackend_OllamaModel")
+        defaults.set(ollamaServerURL, forKey: "AIBackend_OllamaURL")
+        defaults.set(tinyLLMServerURL, forKey: "AIBackend_TinyLLMURL")
+        defaults.set(tinyChatServerURL, forKey: "AIBackend_TinyChatURL")
+        defaults.set(openWebUIServerURL, forKey: "AIBackend_OpenWebUIURL")
+        defaults.set(openAIKey, forKey: "AIBackend_OpenAI_Key")
+        defaults.set(googleCloudKey, forKey: "AIBackend_GoogleCloud_Key")
+        defaults.set(azureKey, forKey: "AIBackend_Azure_Key")
+        defaults.set(azureEndpoint, forKey: "AIBackend_Azure_Endpoint")
+        defaults.set(awsAccessKey, forKey: "AIBackend_AWS_AccessKey")
+        defaults.set(awsSecretKey, forKey: "AIBackend_AWS_SecretKey")
+        defaults.set(awsRegion, forKey: "AIBackend_AWS_Region")
+        defaults.set(ibmKey, forKey: "AIBackend_IBM_Key")
+        defaults.set(ibmURL, forKey: "AIBackend_IBM_URL")
+        defaults.set(temperature, forKey: "AIBackend_Temperature")
+        defaults.set(maxTokens, forKey: "AIBackend_MaxTokens")
+
+        if let statsData = try? JSONEncoder().encode(usageStats) {
+            defaults.set(statsData, forKey: "AIBackend_UsageStats")
+        }
+    }
+
+    func loadConfiguration() {
+        let defaults = UserDefaults.standard
+        if let raw = defaults.string(forKey: "AIBackend_Active"),
+           let backend = AIBackend(rawValue: raw) {
+            activeBackend = backend
+        }
+        isEnabled = defaults.bool(forKey: "AIBackend_Enabled")
+        selectedOllamaModel = defaults.string(forKey: "AIBackend_OllamaModel") ?? "llama3"
+        ollamaServerURL = defaults.string(forKey: "AIBackend_OllamaURL") ?? "http://localhost:11434"
+        tinyLLMServerURL = defaults.string(forKey: "AIBackend_TinyLLMURL") ?? "http://localhost:8000"
+        tinyChatServerURL = defaults.string(forKey: "AIBackend_TinyChatURL") ?? "http://localhost:8000"
+        openWebUIServerURL = defaults.string(forKey: "AIBackend_OpenWebUIURL") ?? "http://localhost:8080"
+        openAIKey = defaults.string(forKey: "AIBackend_OpenAI_Key") ?? ""
+        googleCloudKey = defaults.string(forKey: "AIBackend_GoogleCloud_Key") ?? ""
+        azureKey = defaults.string(forKey: "AIBackend_Azure_Key") ?? ""
+        azureEndpoint = defaults.string(forKey: "AIBackend_Azure_Endpoint") ?? ""
+        awsAccessKey = defaults.string(forKey: "AIBackend_AWS_AccessKey") ?? ""
+        awsSecretKey = defaults.string(forKey: "AIBackend_AWS_SecretKey") ?? ""
+        awsRegion = defaults.string(forKey: "AIBackend_AWS_Region") ?? "us-east-1"
+        ibmKey = defaults.string(forKey: "AIBackend_IBM_Key") ?? ""
+        ibmURL = defaults.string(forKey: "AIBackend_IBM_URL") ?? ""
+        temperature = defaults.double(forKey: "AIBackend_Temperature")
+        if temperature == 0 { temperature = 0.3 }
+        maxTokens = defaults.integer(forKey: "AIBackend_MaxTokens")
+        if maxTokens == 0 { maxTokens = 300 }
+
+        if let statsData = defaults.data(forKey: "AIBackend_UsageStats"),
+           let stats = try? JSONDecoder().decode(UsageStats.self, from: statsData) {
+            usageStats = stats
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+struct UsageStats: Codable {
+    var totalTokens: Int = 0
+    var totalRequests: Int = 0
+    var totalCost: Double = 0
+    var averageResponseTime: Double = 0
+    var lastUsed: Date?
+
+    static func estimatedCostPerRequest(backend: AIBackend, tokens: Int) -> Double {
+        let perMillionTokens: Double
+        switch backend {
+        case .openAI: perMillionTokens = 10.0
+        case .googleCloud: perMillionTokens = 7.0
+        case .azure: perMillionTokens = 10.0
+        case .aws: perMillionTokens = 8.0
+        case .ibmWatson: perMillionTokens = 12.0
+        default: return 0 // Local backends are free
+        }
+        return Double(tokens) / 1_000_000 * perMillionTokens
+    }
+}
+
+struct PerformanceMetrics {
+    var averageLatency: TimeInterval = 0
+    var successRate: Double = 1.0
+    var totalAttempts: Int = 0
+    var successfulAttempts: Int = 0
+    var failedAttempts: Int = 0
+    var lastResponseTime: TimeInterval?
+    var lastSuccess: Date?
+    var lastFailure: Date?
+}
+
+struct ConnectionTestResult {
+    let backend: AIBackend
+    var isSuccess: Bool = false
+    var responseTime: TimeInterval?
+    var message: String = "Not tested"
+}
+
+enum AIGenerationError: LocalizedError {
+    case noBackendAvailable
+    case invalidURL
+    case invalidResponse
+    case httpError(Int)
+    case noResponse
+    case backendNotImplemented(String)
+    case allBackendsFailed
+
+    var errorDescription: String? {
+        switch self {
+        case .noBackendAvailable: return "No AI backend available"
+        case .invalidURL: return "Invalid backend URL"
+        case .invalidResponse: return "Invalid response from AI backend"
+        case .httpError(let code): return "HTTP error \(code)"
+        case .noResponse: return "No response from AI backend"
+        case .backendNotImplemented(let name): return "\(name) backend not yet implemented"
+        case .allBackendsFailed: return "All AI backends failed"
+        }
+    }
+}

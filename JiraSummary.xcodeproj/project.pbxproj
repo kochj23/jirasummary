@@ -14,6 +14,7 @@
 		13BB3BAAF240D1C5FD901ADB /* SSOAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377A9D197BB64C9CD2E9EB6 /* SSOAuthService.swift */; };
 		1425E26CBE309C8568E3B51F /* JiraSummaryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE86BD8E553DC2CECEFE4F /* JiraSummaryApp.swift */; };
 		1E037F3BA0B73AA85E67C2D5 /* PersonSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C2A9FF5DB2AAABC873A817 /* PersonSummary.swift */; };
+		1E845593E74BBA375E9B9F6E /* AIBackendManager+Generation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEC311549AAB873121C8885 /* AIBackendManager+Generation.swift */; };
 		273E73F8CBDC62A71AC42DD9 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22C423047962F8C75F06A94 /* DashboardView.swift */; };
 		2A62967BB93A0F5E9A7121CC /* SprintData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DC5A60880C8378D64E4A42 /* SprintData.swift */; };
 		2D8DBA7205E702004B3120C9 /* JiraCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B032523828F3D8B8EC86C34 /* JiraCloudService.swift */; };
@@ -27,9 +28,11 @@
 		7DF33EFC8F9ECDD4E369A628 /* SummaryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */; };
 		967E52BA4121C0A5DFB8BC24 /* AzureDevOpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B733842167E09960E15FA /* AzureDevOpsService.swift */; };
 		9836ADDA03A006D90F24B5CB /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC71A0DB7BD83F4CA7E3C /* PeopleListView.swift */; };
+		9ABEE5A9058DF4C8E5EFF6DA /* AIBackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F591395AFF2D1783D481DB08 /* AIBackendManager.swift */; };
 		A248CD7AEEF79AC78A9D748F /* SSOWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C68E639237390DD679685A /* SSOWebView.swift */; };
 		AADC0EBE06B2EB8918C3F8FB /* JiraServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4107E6D2A9A5189EAB2545 /* JiraServerService.swift */; };
 		AB464EC964E0DB949CF24DA2 /* AddSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB1A3087F7C326347EF096 /* AddSystemView.swift */; };
+		ABD625B6AB4C084F3B573704 /* AIBackendStatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE316E40E2C38FFCD5F13 /* AIBackendStatusMenu.swift */; };
 		B49C91CA70D1BFC6296C4787 /* DataFetchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8D03091CCB6EA8B24BC62 /* DataFetchCoordinator.swift */; };
 		C19E06A059FD2CAEAD4FB603 /* JiraModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9173E04FAA00BB152CE13924 /* JiraModels.swift */; };
 		CCF58E1E861319D8C13A0040 /* AISummaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63972915C7F99BBB5C74E660 /* AISummaryService.swift */; };
@@ -45,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEngine.swift; sourceTree = "<group>"; };
+		132FE316E40E2C38FFCD5F13 /* AIBackendStatusMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBackendStatusMenu.swift; sourceTree = "<group>"; };
 		1A4107E6D2A9A5189EAB2545 /* JiraServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraServerService.swift; sourceTree = "<group>"; };
 		2EBB1A3087F7C326347EF096 /* AddSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSystemView.swift; sourceTree = "<group>"; };
 		3470DDE57D36266FD1D45E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 		9FEBBF59DAEC3F9634ABBA2F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A22C423047962F8C75F06A94 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		A530001E25E277F1B969D8C6 /* AzureDevOpsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDevOpsModels.swift; sourceTree = "<group>"; };
+		AFEC311549AAB873121C8885 /* AIBackendManager+Generation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIBackendManager+Generation.swift"; sourceTree = "<group>"; };
 		C4C2A9FF5DB2AAABC873A817 /* PersonSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSummary.swift; sourceTree = "<group>"; };
 		C6A3A2F1105D078BD659921E /* TrackedPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedPerson.swift; sourceTree = "<group>"; };
 		C740FEAA78C32C9FE136C6DD /* SummaryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCardView.swift; sourceTree = "<group>"; };
@@ -80,12 +85,15 @@
 		DAF40329E2CBB28326307540 /* MenuBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarManager.swift; sourceTree = "<group>"; };
 		E3ECC71A0DB7BD83F4CA7E3C /* PeopleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		F0D5886A997431FBE5BE4995 /* ModernDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernDesign.swift; sourceTree = "<group>"; };
+		F591395AFF2D1783D481DB08 /* AIBackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBackendManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		0BB029A5ADC33F3BE2D4F200 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F591395AFF2D1783D481DB08 /* AIBackendManager.swift */,
+				AFEC311549AAB873121C8885 /* AIBackendManager+Generation.swift */,
 				63972915C7F99BBB5C74E660 /* AISummaryService.swift */,
 				503B733842167E09960E15FA /* AzureDevOpsService.swift */,
 				80F8D03091CCB6EA8B24BC62 /* DataFetchCoordinator.swift */,
@@ -208,6 +216,7 @@
 		ECA99F34115807A5453E72C6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				132FE316E40E2C38FFCD5F13 /* AIBackendStatusMenu.swift */,
 				9FEBBF59DAEC3F9634ABBA2F /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -292,6 +301,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E845593E74BBA375E9B9F6E /* AIBackendManager+Generation.swift in Sources */,
+				9ABEE5A9058DF4C8E5EFF6DA /* AIBackendManager.swift in Sources */,
+				ABD625B6AB4C084F3B573704 /* AIBackendStatusMenu.swift in Sources */,
 				CCF58E1E861319D8C13A0040 /* AISummaryService.swift in Sources */,
 				43223BD142ADCDAD84CE4F6F /* ActivityTimelineView.swift in Sources */,
 				4120785CFAB045EFB9E2B99A /* AddPersonView.swift in Sources */,
