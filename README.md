@@ -279,3 +279,17 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## Author
 
 Created by Jordan Koch.
+
+---
+
+## More Apps by Jordan Koch
+
+| App | Description |
+|-----|-------------|
+| [MailSummary](https://github.com/kochj23/MailSummary) | AI-powered email categorization and summarization |
+| [NewsSummary](https://github.com/kochj23/NewsSummary) | AI-powered news aggregation and summarization |
+| [MLXCode](https://github.com/kochj23/MLXCode) | Local AI coding assistant for Apple Silicon |
+| [OneOnOne](https://github.com/kochj23/OneOnOne) | One-on-one meeting management tool |
+| [ExcelExplorer](https://github.com/kochj23/ExcelExplorer) | Native macOS Excel/CSV file viewer |
+
+> **[View all projects](https://github.com/kochj23?tab=repositories)**
