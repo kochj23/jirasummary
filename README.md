@@ -1,5 +1,7 @@
 # JiraSummary
 
+![Build](https://github.com/kochj23/JiraSummary/actions/workflows/build.yml/badge.svg)
+
 A macOS application for tracking team activity across multiple Jira Cloud, Jira Server/Data Center, and Azure DevOps instances. Built for engineering managers who need weekly/sprint summaries with ticket activity, sprint velocity, and AI-generated natural language insights.
 
 **Current Version**: v1.0.0
