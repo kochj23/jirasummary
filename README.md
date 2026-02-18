@@ -4,6 +4,12 @@ A macOS application for tracking team activity across multiple Jira Cloud, Jira 
 
 **Current Version**: v1.0.0
 
+---
+
+![Jira Summary](Screenshots/main-window.png)
+
+---
+
 ## Features
 
 ### Multi-System Support
