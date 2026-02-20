@@ -23,6 +23,7 @@
 		477ABCBFB0D93E8B6DBA426E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEBBF59DAEC3F9634ABBA2F /* SettingsView.swift */; };
 		4C759FF497F8BD70C3EFAE8C /* TicketActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F9679092966C49BC35A6F /* TicketActivity.swift */; };
 		4E6B0FF9EB27AE745AD552FD /* MenuBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF40329E2CBB28326307540 /* MenuBarManager.swift */; };
+/* Removed: AIBackendManager+Enhanced.swift - duplicate/broken declarations */
 		678E9A68AF2194BB0ECB88B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3601B238FD7B05CA1BA449C3 /* Assets.xcassets */; };
 		6DE358832F034C6B81275479 /* TicketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFF52366800E8D6147C793C /* TicketListView.swift */; };
 		7DF33EFC8F9ECDD4E369A628 /* SummaryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */; };
@@ -44,10 +45,40 @@
 		F6C8EC7A40839CE7379A29E5 /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBE9AEFFFBD956543080D4A /* PersonDetailView.swift */; };
 		FB24F84B8C5F167B83CBD979 /* ModernDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D5886A997431FBE5BE4995 /* ModernDesign.swift */; };
 		FD271622149C64EE6EB310E2 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5474B20D5A99D1266C9BF5FD /* SidebarView.swift */; };
+		AA11BB22CC33DD44EE55FF66 /* WidgetDataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF67 /* WidgetDataSync.swift */; };
+		WGT_BF_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift */; };
+		WGT_BF_WDATA_SWIFT_12345 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_WDATA_SWIFT_12345 /* WidgetData.swift */; };
+		WGT_BF_SHARED_SWIFT_1234 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_SHARED_SWIFT_1234 /* SharedDataManager.swift */; };
+		WGT_BF_APPEX_EMBED_12345 /* JiraSummary Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = WGT_FR_APPEX_PRODUCT_123 /* JiraSummary Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		WGT_CONTAINER_PROXY_1234 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9399050F5B905CE19EB503CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = WGT_NATIVE_TARGET_123456 /* JiraSummary Widget */;
+			remoteInfo = "JiraSummary Widget";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		WGT_EMBED_EXTENSIONS_123 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				WGT_BF_APPEX_EMBED_12345 /* JiraSummary Widget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEngine.swift; sourceTree = "<group>"; };
+		0DCC2D92997B6ADE34D34080 /* AIBackendManager+Enhanced.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "AIBackendManager+Enhanced.swift"; path = "JiraSummary/Services/AIBackendManager+Enhanced.swift"; sourceTree = "<group>"; };
 		132FE316E40E2C38FFCD5F13 /* AIBackendStatusMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBackendStatusMenu.swift; sourceTree = "<group>"; };
 		1A4107E6D2A9A5189EAB2545 /* JiraServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraServerService.swift; sourceTree = "<group>"; };
 		2EBB1A3087F7C326347EF096 /* AddSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSystemView.swift; sourceTree = "<group>"; };
@@ -86,7 +117,24 @@
 		E3ECC71A0DB7BD83F4CA7E3C /* PeopleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		F0D5886A997431FBE5BE4995 /* ModernDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernDesign.swift; sourceTree = "<group>"; };
 		F591395AFF2D1783D481DB08 /* AIBackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBackendManager.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE55FF67 /* WidgetDataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataSync.swift; sourceTree = "<group>"; };
+		WGT_FR_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSummaryWidget.swift; sourceTree = "<group>"; };
+		WGT_FR_WDATA_SWIFT_12345 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
+		WGT_FR_SHARED_SWIFT_1234 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
+		WGT_FR_INFO_PLIST_12345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		WGT_FR_ENTITLEMENTS_1234 /* JiraSummary_Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiraSummary_Widget.entitlements; sourceTree = "<group>"; };
+		WGT_FR_APPEX_PRODUCT_123 /* JiraSummary Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "JiraSummary Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		WGT_FRAMEWORKS_PHASE_123 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0BB029A5ADC33F3BE2D4F200 /* Services */ = {
@@ -104,6 +152,7 @@
 				DAF40329E2CBB28326307540 /* MenuBarManager.swift */,
 				8377A9D197BB64C9CD2E9EB6 /* SSOAuthService.swift */,
 				0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */,
+				AA11BB22CC33DD44EE55FF67 /* WidgetDataSync.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -126,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				38A7B5737D0B76C737CAB38B /* JiraSummary.app */,
+				WGT_FR_APPEX_PRODUCT_123 /* JiraSummary Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +195,14 @@
 				C740FEAA78C32C9FE136C6DD /* SummaryCardView.swift */,
 			);
 			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		8ED26383A24BD51175FB9E15 /* AIBackend */ = {
+			isa = PBXGroup;
+			children = (
+				0DCC2D92997B6ADE34D34080 /* AIBackendManager+Enhanced.swift */,
+			);
+			name = AIBackend;
 			sourceTree = "<group>";
 		};
 		ADD1D097F6A42C07C137AC8F /* Systems */ = {
@@ -222,11 +280,25 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		WGT_GROUP_WIDGET_EXT_123 /* JiraSummary Widget */ = {
+			isa = PBXGroup;
+			children = (
+				WGT_FR_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift */,
+				WGT_FR_WDATA_SWIFT_12345 /* WidgetData.swift */,
+				WGT_FR_SHARED_SWIFT_1234 /* SharedDataManager.swift */,
+				WGT_FR_INFO_PLIST_12345 /* Info.plist */,
+				WGT_FR_ENTITLEMENTS_1234 /* JiraSummary_Widget.entitlements */,
+			);
+			path = "JiraSummary Widget";
+			sourceTree = "<group>";
+		};
 		EE20CECB2E5DD03844EFC5A2 = {
 			isa = PBXGroup;
 			children = (
 				DC17F7B8A1400966642F786D /* JiraSummary */,
+				WGT_GROUP_WIDGET_EXT_123 /* JiraSummary Widget */,
 				876CA105F785E3B3D73C2C01 /* Products */,
+				8ED26383A24BD51175FB9E15 /* AIBackend */,
 			);
 			sourceTree = "<group>";
 		};
@@ -239,17 +311,34 @@
 			buildPhases = (
 				31D10DCD672FBD052EE888F9 /* Sources */,
 				23170D004731DFC1BE8EC65E /* Resources */,
+				WGT_EMBED_EXTENSIONS_123 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				WGT_TARGET_DEPENDENCY_123 /* PBXTargetDependency */,
+			);
+			name = JiraSummary;
+			productName = JiraSummary;
+			productReference = 38A7B5737D0B76C737CAB38B /* JiraSummary.app */;
+			productType = "com.apple.product-type.application";
+		};
+		WGT_NATIVE_TARGET_123456 /* JiraSummary Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = WGT_CONFIGLIST_TARGET_12 /* Build configuration list for PBXNativeTarget "JiraSummary Widget" */;
+			buildPhases = (
+				WGT_SOURCES_PHASE_123456 /* Sources */,
+				WGT_FRAMEWORKS_PHASE_123 /* Frameworks */,
+				WGT_RESOURCES_PHASE_12345 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = JiraSummary;
-			packageProductDependencies = (
-			);
-			productName = JiraSummary;
-			productReference = 38A7B5737D0B76C737CAB38B /* JiraSummary.app */;
-			productType = "com.apple.product-type.application";
+			name = "JiraSummary Widget";
+			productName = "JiraSummary Widget";
+			productReference = WGT_FR_APPEX_PRODUCT_123 /* JiraSummary Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -261,6 +350,10 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					18129440F2A4C841EC3BFE57 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+					WGT_NATIVE_TARGET_123456 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Manual;
 					};
@@ -277,10 +370,12 @@
 			mainGroup = EE20CECB2E5DD03844EFC5A2;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
+			productRefGroup = 876CA105F785E3B3D73C2C01 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				18129440F2A4C841EC3BFE57 /* JiraSummary */,
+				WGT_NATIVE_TARGET_123456 /* JiraSummary Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -291,6 +386,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				678E9A68AF2194BB0ECB88B2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		WGT_RESOURCES_PHASE_12345 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,10 +439,30 @@
 				4C759FF497F8BD70C3EFAE8C /* TicketActivity.swift in Sources */,
 				6DE358832F034C6B81275479 /* TicketListView.swift in Sources */,
 				00CEBA1CE6648395F0E5DEA6 /* TrackedPerson.swift in Sources */,
+/* Removed: AIBackendManager+Enhanced.swift */
+				AA11BB22CC33DD44EE55FF66 /* WidgetDataSync.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		WGT_SOURCES_PHASE_123456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				WGT_BF_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift in Sources */,
+				WGT_BF_WDATA_SWIFT_12345 /* WidgetData.swift in Sources */,
+				WGT_BF_SHARED_SWIFT_1234 /* SharedDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		WGT_TARGET_DEPENDENCY_123 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = WGT_NATIVE_TARGET_123456 /* JiraSummary Widget */;
+			targetProxy = WGT_CONTAINER_PROXY_1234 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		061FC4D06AA60328C636F7E9 /* Release */ = {
@@ -471,11 +593,12 @@
 		4791C5D6FAC83AEB91C9D3BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGN_ENTITLEMENTS = JiraSummary/JiraSummary.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = JiraSummary/Info.plist;
@@ -483,7 +606,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jordankoch.JiraSummary;
 				PRODUCT_NAME = JiraSummary;
 				SDKROOT = macosx;
@@ -493,11 +616,12 @@
 		9B03056A4C6E4808C8DAA33D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGN_ENTITLEMENTS = JiraSummary/JiraSummary.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = JiraSummary/Info.plist;
@@ -505,10 +629,58 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jordankoch.JiraSummary;
 				PRODUCT_NAME = JiraSummary;
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		WGT_DEBUG_CONFIG_1234567 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_ENTITLEMENTS = "JiraSummary Widget/JiraSummary_Widget.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "JiraSummary Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jordankoch.JiraSummary.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		WGT_RELEASE_CONFIG_12345 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_ENTITLEMENTS = "JiraSummary Widget/JiraSummary_Widget.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "JiraSummary Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jordankoch.JiraSummary.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
 			};
 			name = Release;
 		};
@@ -529,6 +701,15 @@
 			buildConfigurations = (
 				335B1B496C5B7DD0293D0960 /* Debug */,
 				061FC4D06AA60328C636F7E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		WGT_CONFIGLIST_TARGET_12 /* Build configuration list for PBXNativeTarget "JiraSummary Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				WGT_DEBUG_CONFIG_1234567 /* Debug */,
+				WGT_RELEASE_CONFIG_12345 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

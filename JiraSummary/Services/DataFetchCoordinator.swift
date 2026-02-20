@@ -78,6 +78,7 @@ final class DataFetchCoordinator {
         }
 
         dataStore.saveLastRefreshDate()
+        WidgetDataSyncService.shared.syncFromDataStore()
         fetchProgress = "Done"
         isFetching = false
         logger.info("Fetch complete for \(connections.count) systems, \(people.count) people")
