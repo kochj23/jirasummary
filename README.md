@@ -226,12 +226,19 @@ JiraSummary/
 ## Security
 
 - **No App Sandbox** — Full file system access for system utility functionality
-- **macOS Keychain** — All credentials stored securely with WhenUnlockedThisDeviceOnly access
+- **macOS Keychain** — All credentials and API keys stored securely with WhenUnlockedThisDeviceOnly access
 - **Local AI Default** — Ollama and other local backends keep all data on your machine
-- **Cloud API Keys** — Stored in UserDefaults locally, never transmitted to third parties
 - **SSO Authentication** — No passwords stored; uses session cookies/tokens with natural expiry
 - **Network Client** — Outbound connections only, no server component
 - **Hardened Runtime** — Enabled for distribution builds
+
+### Security Hardening (February 2026)
+
+- **JQL Injection Prevention** — User input sanitized before inclusion in JQL queries (JiraCloudService)
+- **WIQL Injection Prevention** — Parameterized queries for Azure DevOps WIQL (AzureDevOpsService)
+- **Force-Unwrap Elimination** — 27 force-unwraps replaced with safe optional handling across all service layers
+- **App Transport Security** — NSAllowsArbitraryLoads removed; all connections require HTTPS
+- **API Key Migration** — Cloud AI backend API keys migrated from UserDefaults to macOS Keychain
 
 ## Troubleshooting
 
