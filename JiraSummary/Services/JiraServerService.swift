@@ -22,10 +22,20 @@ actor JiraServerService {
         self.session = URLSession(configuration: config)
     }
 
+    // MARK: - JQL Escaping
+
+    private func escapeJQL(_ value: String) -> String {
+        value.replacingOccurrences(of: "\\", with: "\\\\")
+             .replacingOccurrences(of: "\"", with: "\\\"")
+             .replacingOccurrences(of: "'", with: "\\'")
+    }
+
     // MARK: - Search Issues (JQL)
 
     func searchIssues(jql: String, startAt: Int = 0, maxResults: Int = 50) async throws -> JiraSearchResponse {
-        var components = URLComponents(url: baseURL.appendingPathComponent("/rest/api/2/search"), resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: baseURL.appendingPathComponent("/rest/api/2/search"), resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [
             URLQueryItem(name: "jql", value: jql),
             URLQueryItem(name: "startAt", value: String(startAt)),
@@ -34,7 +44,8 @@ actor JiraServerService {
             URLQueryItem(name: "fields", value: "summary,status,priority,issuetype,assignee,creator,created,updated,resolutiondate,customfield_10016,sprint")
         ]
 
-        let request = try authenticatedRequest(url: components.url!)
+        guard let url = components.url else { throw APIError.invalidURL }
+        let request = try authenticatedRequest(url: url)
         let (data, response) = try await session.data(for: request)
         try validateResponse(response)
         return try JSONDecoder().decode(JiraSearchResponse.self, from: data)
@@ -47,7 +58,8 @@ actor JiraServerService {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let sinceStr = dateFormatter.string(from: since)
 
-        let jql = "(assignee = \"\(username)\" OR creator = \"\(username)\") AND updated >= \"\(sinceStr)\" ORDER BY updated DESC"
+        let escapedUsername = escapeJQL(username)
+        let jql = "(assignee = \"\(escapedUsername)\" OR creator = \"\(escapedUsername)\") AND updated >= \"\(sinceStr)\" ORDER BY updated DESC"
 
         var allIssues: [JiraIssue] = []
         var startAt = 0
@@ -66,14 +78,20 @@ actor JiraServerService {
     // MARK: - Sprint Data
 
     func fetchSprints(boardId: String) async throws -> [JiraSprint] {
-        let url = baseURL.appendingPathComponent("/rest/agile/1.0/board/\(boardId)/sprint")
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        guard let boardInt = Int(boardId) else {
+            throw APIError.invalidParameter("boardId must be a valid integer")
+        }
+        let url = baseURL.appendingPathComponent("/rest/agile/1.0/board/\(boardInt)/sprint")
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [
             URLQueryItem(name: "state", value: "active,closed"),
             URLQueryItem(name: "maxResults", value: "10")
         ]
 
-        let request = try authenticatedRequest(url: components.url!)
+        guard let requestURL = components.url else { throw APIError.invalidURL }
+        let request = try authenticatedRequest(url: requestURL)
         let (data, response) = try await session.data(for: request)
         try validateResponse(response)
         return try JSONDecoder().decode(JiraSprintResponse.self, from: data).values
@@ -83,12 +101,15 @@ actor JiraServerService {
 
     func fetchBoards() async throws -> [JiraBoard] {
         let url = baseURL.appendingPathComponent("/rest/agile/1.0/board")
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [
             URLQueryItem(name: "maxResults", value: "50")
         ]
 
-        let request = try authenticatedRequest(url: components.url!)
+        guard let requestURL = components.url else { throw APIError.invalidURL }
+        let request = try authenticatedRequest(url: requestURL)
         let (data, response) = try await session.data(for: request)
         try validateResponse(response)
         return try JSONDecoder().decode(JiraBoardResponse.self, from: data).values
@@ -97,13 +118,16 @@ actor JiraServerService {
     // MARK: - User Search
 
     func searchUsers(query: String) async throws -> [JiraUserSearchResult] {
-        var components = URLComponents(url: baseURL.appendingPathComponent("/rest/api/2/user/search"), resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: baseURL.appendingPathComponent("/rest/api/2/user/search"), resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [
             URLQueryItem(name: "username", value: query),
             URLQueryItem(name: "maxResults", value: "20")
         ]
 
-        let request = try authenticatedRequest(url: components.url!)
+        guard let url = components.url else { throw APIError.invalidURL }
+        let request = try authenticatedRequest(url: url)
         let (data, response) = try await session.data(for: request)
         try validateResponse(response)
         return try JSONDecoder().decode([JiraUserSearchResult].self, from: data)

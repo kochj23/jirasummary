@@ -22,17 +22,35 @@ actor AzureDevOpsService {
         self.session = URLSession(configuration: config)
     }
 
+    // MARK: - WIQL Escaping & Validation
+
+    private func escapeWIQL(_ value: String) -> String {
+        value.replacingOccurrences(of: "'", with: "''")
+    }
+
+    private static let validProjectNameRegex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9_\\- .]+$")
+
+    private func validateProjectName(_ project: String) throws {
+        let range = NSRange(project.startIndex..<project.endIndex, in: project)
+        guard Self.validProjectNameRegex.firstMatch(in: project, range: range) != nil else {
+            throw APIError.invalidParameter("Project name contains invalid characters")
+        }
+    }
+
     // MARK: - Projects
 
     func fetchProjects() async throws -> [AzDOProject] {
         let url = baseURL.appendingPathComponent("/_apis/projects")
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [
             URLQueryItem(name: "api-version", value: "7.1"),
             URLQueryItem(name: "$top", value: "50")
         ]
 
-        let request = try authenticatedRequest(url: components.url!)
+        guard let requestURL = components.url else { throw APIError.invalidURL }
+        let request = try authenticatedRequest(url: requestURL)
         let (data, response) = try await session.data(for: request)
         try validateResponse(response)
         return try JSONDecoder().decode(AzDOProjectsResponse.self, from: data).value ?? []
@@ -43,10 +61,13 @@ actor AzureDevOpsService {
     func queryWorkItems(wiql: String) async throws -> [AzDOWorkItem] {
         // Step 1: Execute WIQL query to get work item IDs
         let wiqlURL = baseURL.appendingPathComponent("/_apis/wit/wiql")
-        var components = URLComponents(url: wiqlURL, resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: wiqlURL, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [URLQueryItem(name: "api-version", value: "7.1")]
 
-        var request = try authenticatedRequest(url: components.url!)
+        guard let requestURL = components.url else { throw APIError.invalidURL }
+        var request = try authenticatedRequest(url: requestURL)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
@@ -70,14 +91,17 @@ actor AzureDevOpsService {
             let batchIds = workItemRefs[batchStart..<batchEnd].map { String($0.id) }.joined(separator: ",")
 
             let itemsURL = baseURL.appendingPathComponent("/_apis/wit/workitems")
-            var itemComponents = URLComponents(url: itemsURL, resolvingAgainstBaseURL: false)!
+            guard var itemComponents = URLComponents(url: itemsURL, resolvingAgainstBaseURL: false) else {
+                throw APIError.invalidURL
+            }
             itemComponents.queryItems = [
                 URLQueryItem(name: "ids", value: batchIds),
                 URLQueryItem(name: "api-version", value: "7.1"),
                 URLQueryItem(name: "$expand", value: "all")
             ]
 
-            let itemRequest = try authenticatedRequest(url: itemComponents.url!)
+            guard let itemURL = itemComponents.url else { throw APIError.invalidURL }
+            let itemRequest = try authenticatedRequest(url: itemURL)
             let (itemData, itemResponse) = try await session.data(for: itemRequest)
             try validateResponse(itemResponse)
 
@@ -97,16 +121,20 @@ actor AzureDevOpsService {
         dateFormatter.formatOptions = [.withFullDate]
         let sinceStr = dateFormatter.string(from: since)
 
+        let escapedUniqueName = escapeWIQL(uniqueName)
+
         var projectScope = ""
         if let project = project {
-            projectScope = "[\(project)]."
+            try validateProjectName(project)
+            let escapedProject = escapeWIQL(project)
+            projectScope = "[\(escapedProject)]."
         }
 
         let wiql = """
         SELECT [System.Id]
         FROM WorkItems
-        WHERE (\(projectScope)[System.AssignedTo] = '\(uniqueName)'
-               OR \(projectScope)[System.CreatedBy] = '\(uniqueName)')
+        WHERE (\(projectScope)[System.AssignedTo] = '\(escapedUniqueName)'
+               OR \(projectScope)[System.CreatedBy] = '\(escapedUniqueName)')
         AND [System.ChangedDate] >= '\(sinceStr)'
         ORDER BY [System.ChangedDate] DESC
         """
@@ -118,10 +146,13 @@ actor AzureDevOpsService {
 
     func fetchWorkItemUpdates(workItemId: Int) async throws -> [AzDOWorkItemUpdate] {
         let url = baseURL.appendingPathComponent("/_apis/wit/workitems/\(workItemId)/updates")
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [URLQueryItem(name: "api-version", value: "7.1")]
 
-        let request = try authenticatedRequest(url: components.url!)
+        guard let requestURL = components.url else { throw APIError.invalidURL }
+        let request = try authenticatedRequest(url: requestURL)
         let (data, response) = try await session.data(for: request)
         try validateResponse(response)
 
@@ -133,13 +164,16 @@ actor AzureDevOpsService {
     func fetchIterations(project: String, team: String? = nil) async throws -> [AzDOIteration] {
         let teamPath = team.map { "/\($0)" } ?? ""
         let url = baseURL.appendingPathComponent("/\(project)\(teamPath)/_apis/work/teamsettings/iterations")
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [
             URLQueryItem(name: "api-version", value: "7.1"),
             URLQueryItem(name: "$timeframe", value: "current")
         ]
 
-        let request = try authenticatedRequest(url: components.url!)
+        guard let requestURL = components.url else { throw APIError.invalidURL }
+        let request = try authenticatedRequest(url: requestURL)
         let (data, response) = try await session.data(for: request)
         try validateResponse(response)
 
@@ -150,10 +184,13 @@ actor AzureDevOpsService {
 
     func fetchTeamMembers(project: String, team: String) async throws -> [AzDOTeamMember] {
         let url = baseURL.appendingPathComponent("/_apis/projects/\(project)/teams/\(team)/members")
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
         components.queryItems = [URLQueryItem(name: "api-version", value: "7.1")]
 
-        let request = try authenticatedRequest(url: components.url!)
+        guard let requestURL = components.url else { throw APIError.invalidURL }
+        let request = try authenticatedRequest(url: requestURL)
         let (data, response) = try await session.data(for: request)
         try validateResponse(response)
 

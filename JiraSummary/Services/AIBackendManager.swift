@@ -12,6 +12,7 @@
 import Foundation
 import os.log
 import Observation
+import Security
 
 enum AIBackend: String, CaseIterable, Codable, Identifiable {
     case ollama = "Ollama"
@@ -264,10 +265,81 @@ final class AIBackendManager {
         monitoringTask = nil
     }
 
+    // MARK: - Keychain Helpers
+
+    private static let keychainService = "com.jordankoch.JiraSummary"
+
+    /// API key identifiers that must be stored in Keychain, not UserDefaults
+    private static let apiKeyDefaults: [String] = [
+        "AIBackend_OpenAI_Key",
+        "AIBackend_GoogleCloud_Key",
+        "AIBackend_Azure_Key",
+        "AIBackend_Azure_Endpoint",
+        "AIBackend_AWS_AccessKey",
+        "AIBackend_AWS_SecretKey",
+        "AIBackend_IBM_Key",
+        "AIBackend_IBM_URL"
+    ]
+
+    private func saveToKeychain(key: String, value: String) {
+        let data = Data(value.utf8)
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecAttrService as String: Self.keychainService,
+            kSecValueData as String: data
+        ]
+        SecItemDelete(query as CFDictionary)
+        SecItemAdd(query as CFDictionary, nil)
+    }
+
+    private func loadFromKeychain(key: String) -> String? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecAttrService as String: Self.keychainService,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard status == errSecSuccess, let data = result as? Data else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+
+    private func deleteFromKeychain(key: String) {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecAttrService as String: Self.keychainService
+        ]
+        SecItemDelete(query as CFDictionary)
+    }
+
+    /// One-time migration: move API keys from UserDefaults to Keychain, then delete from UserDefaults
+    private func migrateKeysFromUserDefaults() {
+        let defaults = UserDefaults.standard
+        let migrationKey = "AIBackend_KeychainMigrationComplete"
+        guard !defaults.bool(forKey: migrationKey) else { return }
+
+        for key in Self.apiKeyDefaults {
+            if let value = defaults.string(forKey: key), !value.isEmpty {
+                saveToKeychain(key: key, value: value)
+                defaults.removeObject(forKey: key)
+                logger.info("Migrated \(key) from UserDefaults to Keychain")
+            }
+        }
+
+        defaults.set(true, forKey: migrationKey)
+        logger.info("API key migration from UserDefaults to Keychain complete")
+    }
+
     // MARK: - Configuration Persistence
 
     func saveConfiguration() {
         let defaults = UserDefaults.standard
+
+        // Non-sensitive settings stay in UserDefaults
         defaults.set(activeBackend.rawValue, forKey: "AIBackend_Active")
         defaults.set(isEnabled, forKey: "AIBackend_Enabled")
         defaults.set(selectedOllamaModel, forKey: "AIBackend_OllamaModel")
@@ -275,25 +347,32 @@ final class AIBackendManager {
         defaults.set(tinyLLMServerURL, forKey: "AIBackend_TinyLLMURL")
         defaults.set(tinyChatServerURL, forKey: "AIBackend_TinyChatURL")
         defaults.set(openWebUIServerURL, forKey: "AIBackend_OpenWebUIURL")
-        defaults.set(openAIKey, forKey: "AIBackend_OpenAI_Key")
-        defaults.set(googleCloudKey, forKey: "AIBackend_GoogleCloud_Key")
-        defaults.set(azureKey, forKey: "AIBackend_Azure_Key")
-        defaults.set(azureEndpoint, forKey: "AIBackend_Azure_Endpoint")
-        defaults.set(awsAccessKey, forKey: "AIBackend_AWS_AccessKey")
-        defaults.set(awsSecretKey, forKey: "AIBackend_AWS_SecretKey")
         defaults.set(awsRegion, forKey: "AIBackend_AWS_Region")
-        defaults.set(ibmKey, forKey: "AIBackend_IBM_Key")
-        defaults.set(ibmURL, forKey: "AIBackend_IBM_URL")
         defaults.set(temperature, forKey: "AIBackend_Temperature")
         defaults.set(maxTokens, forKey: "AIBackend_MaxTokens")
 
         if let statsData = try? JSONEncoder().encode(usageStats) {
             defaults.set(statsData, forKey: "AIBackend_UsageStats")
         }
+
+        // API keys and secrets go to Keychain
+        saveToKeychain(key: "AIBackend_OpenAI_Key", value: openAIKey)
+        saveToKeychain(key: "AIBackend_GoogleCloud_Key", value: googleCloudKey)
+        saveToKeychain(key: "AIBackend_Azure_Key", value: azureKey)
+        saveToKeychain(key: "AIBackend_Azure_Endpoint", value: azureEndpoint)
+        saveToKeychain(key: "AIBackend_AWS_AccessKey", value: awsAccessKey)
+        saveToKeychain(key: "AIBackend_AWS_SecretKey", value: awsSecretKey)
+        saveToKeychain(key: "AIBackend_IBM_Key", value: ibmKey)
+        saveToKeychain(key: "AIBackend_IBM_URL", value: ibmURL)
     }
 
     func loadConfiguration() {
         let defaults = UserDefaults.standard
+
+        // Migrate any keys still in UserDefaults to Keychain (one-time)
+        migrateKeysFromUserDefaults()
+
+        // Non-sensitive settings from UserDefaults
         if let raw = defaults.string(forKey: "AIBackend_Active"),
            let backend = AIBackend(rawValue: raw) {
             activeBackend = backend
@@ -304,15 +383,7 @@ final class AIBackendManager {
         tinyLLMServerURL = defaults.string(forKey: "AIBackend_TinyLLMURL") ?? "http://localhost:8000"
         tinyChatServerURL = defaults.string(forKey: "AIBackend_TinyChatURL") ?? "http://localhost:8000"
         openWebUIServerURL = defaults.string(forKey: "AIBackend_OpenWebUIURL") ?? "http://localhost:8080"
-        openAIKey = defaults.string(forKey: "AIBackend_OpenAI_Key") ?? ""
-        googleCloudKey = defaults.string(forKey: "AIBackend_GoogleCloud_Key") ?? ""
-        azureKey = defaults.string(forKey: "AIBackend_Azure_Key") ?? ""
-        azureEndpoint = defaults.string(forKey: "AIBackend_Azure_Endpoint") ?? ""
-        awsAccessKey = defaults.string(forKey: "AIBackend_AWS_AccessKey") ?? ""
-        awsSecretKey = defaults.string(forKey: "AIBackend_AWS_SecretKey") ?? ""
         awsRegion = defaults.string(forKey: "AIBackend_AWS_Region") ?? "us-east-1"
-        ibmKey = defaults.string(forKey: "AIBackend_IBM_Key") ?? ""
-        ibmURL = defaults.string(forKey: "AIBackend_IBM_URL") ?? ""
         temperature = defaults.double(forKey: "AIBackend_Temperature")
         if temperature == 0 { temperature = 0.3 }
         maxTokens = defaults.integer(forKey: "AIBackend_MaxTokens")
@@ -322,6 +393,16 @@ final class AIBackendManager {
            let stats = try? JSONDecoder().decode(UsageStats.self, from: statsData) {
             usageStats = stats
         }
+
+        // API keys and secrets from Keychain
+        openAIKey = loadFromKeychain(key: "AIBackend_OpenAI_Key") ?? ""
+        googleCloudKey = loadFromKeychain(key: "AIBackend_GoogleCloud_Key") ?? ""
+        azureKey = loadFromKeychain(key: "AIBackend_Azure_Key") ?? ""
+        azureEndpoint = loadFromKeychain(key: "AIBackend_Azure_Endpoint") ?? ""
+        awsAccessKey = loadFromKeychain(key: "AIBackend_AWS_AccessKey") ?? ""
+        awsSecretKey = loadFromKeychain(key: "AIBackend_AWS_SecretKey") ?? ""
+        ibmKey = loadFromKeychain(key: "AIBackend_IBM_Key") ?? ""
+        ibmURL = loadFromKeychain(key: "AIBackend_IBM_URL") ?? ""
     }
 }
 
