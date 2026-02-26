@@ -46,3 +46,4 @@ config.plist
 .idea/
 .vscode/
 *.code-workspace
+*.xcuserstate
