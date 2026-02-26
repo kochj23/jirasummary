@@ -19,8 +19,8 @@ A macOS application for tracking team activity across multiple Jira Cloud, Jira 
 - Per-system user tracking with individual activity aggregation
 - Parallel data fetching across all connected systems using Swift structured concurrency
 
-### SSO Authentication
-- Embedded WKWebView SSO login (Okta, Azure AD, SAML)
+### SSO (Single Sign-On) Authentication
+- Embedded WKWebView SSO login (Okta, Azure AD, SAML (Security Assertion Markup Language))
 - Automatic cookie/token capture per system type
 - Secure credential storage in macOS Keychain
 - Non-persistent web data store for clean sessions
@@ -35,7 +35,7 @@ A macOS application for tracking team activity across multiple Jira Cloud, Jira 
 
 ### AI Summaries — Multi-Backend
 - **10 AI backends** with auto-fallback:
-  - **Local**: Ollama, MLX, TinyLLM, TinyChat, OpenWebUI
+  - **Local**: Ollama, MLX (Machine Learning eXtensions), TinyLLM, TinyChat, OpenWebUI
   - **Cloud**: OpenAI, Google Cloud, Azure, AWS, IBM Watson
 - Automatic fallback chain: Ollama → OpenAI → TinyChat → TinyLLM → OpenWebUI → MLX
 - Configurable generation parameters (temperature, max tokens)
@@ -67,7 +67,7 @@ A macOS application for tracking team activity across multiple Jira Cloud, Jira 
 
 | Backend | Install | Notes |
 |---------|---------|-------|
-| Ollama | `brew install ollama` | Local LLM server, recommended default |
+| Ollama | `brew install ollama` | Local LLM (Large Language Model) server, recommended default |
 | MLX | `pip install mlx-lm` | Apple Silicon native inference |
 | TinyLLM | Self-hosted | OpenAI-compatible local server |
 | TinyChat | Self-hosted | Lightweight chat server |
@@ -80,7 +80,7 @@ A macOS application for tracking team activity across multiple Jira Cloud, Jira 
 
 ## Installation
 
-Download the latest DMG from Releases, or build from source:
+Download the latest DMG (Disk Image) from Releases, or build from source:
 
 ```bash
 git clone git@github.com:kochj23/JiraSummary.git
@@ -234,8 +234,8 @@ JiraSummary/
 
 ### Security Hardening (February 2026)
 
-- **JQL Injection Prevention** — User input sanitized before inclusion in JQL queries (JiraCloudService)
-- **WIQL Injection Prevention** — Parameterized queries for Azure DevOps WIQL (AzureDevOpsService)
+- **JQL (Jira Query Language) Injection Prevention** — User input sanitized before inclusion in JQL queries (JiraCloudService)
+- **WIQL (Work Item Query Language) Injection Prevention** — Parameterized queries for Azure DevOps WIQL (AzureDevOpsService)
 - **Force-Unwrap Elimination** — 27 force-unwraps replaced with safe optional handling across all service layers
 - **App Transport Security** — NSAllowsArbitraryLoads removed; all connections require HTTPS
 - **API Key Migration** — Cloud AI backend API keys migrated from UserDefaults to macOS Keychain
