@@ -95,7 +95,7 @@
 		6BFF52366800E8D6147C793C /* TicketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketListView.swift; sourceTree = "<group>"; };
 		73DE86BD8E553DC2CECEFE4F /* JiraSummaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSummaryApp.swift; sourceTree = "<group>"; };
 		79DC5A60880C8378D64E4A42 /* SprintData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintData.swift; sourceTree = "<group>"; };
-		7ACBACF7F55E6BF5260DCF0D /* NovaAPIServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NovaAPIServer.swift; sourceTree = "<absolute>"; };
+		7ACBACF7F55E6BF5260DCF0D /* NovaAPIServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "/Volumes/Data/xcode/JiraSummary/JiraSummary/NovaAPIServer.swift"; sourceTree = "<absolute>"; };
 		80F8D03091CCB6EA8B24BC62 /* DataFetchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetchCoordinator.swift; sourceTree = "<group>"; };
 		8377A9D197BB64C9CD2E9EB6 /* SSOAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOAuthService.swift; sourceTree = "<group>"; };
 		8B032523828F3D8B8EC86C34 /* JiraCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraCloudService.swift; sourceTree = "<group>"; };
