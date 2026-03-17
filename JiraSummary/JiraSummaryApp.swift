@@ -12,6 +12,10 @@ import SwiftUI
 struct JiraSummaryApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
+    init() {
+        NovaAPIServer.shared.start()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
