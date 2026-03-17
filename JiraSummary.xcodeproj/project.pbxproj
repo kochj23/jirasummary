@@ -23,7 +23,6 @@
 		477ABCBFB0D93E8B6DBA426E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEBBF59DAEC3F9634ABBA2F /* SettingsView.swift */; };
 		4C759FF497F8BD70C3EFAE8C /* TicketActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924F9679092966C49BC35A6F /* TicketActivity.swift */; };
 		4E6B0FF9EB27AE745AD552FD /* MenuBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF40329E2CBB28326307540 /* MenuBarManager.swift */; };
-/* Removed: AIBackendManager+Enhanced.swift - duplicate/broken declarations */
 		678E9A68AF2194BB0ECB88B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3601B238FD7B05CA1BA449C3 /* Assets.xcassets */; };
 		6DE358832F034C6B81275479 /* TicketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFF52366800E8D6147C793C /* TicketListView.swift */; };
 		7DF33EFC8F9ECDD4E369A628 /* SummaryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49EE123B41B87B7C3E6C9F /* SummaryEngine.swift */; };
@@ -31,10 +30,12 @@
 		9836ADDA03A006D90F24B5CB /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC71A0DB7BD83F4CA7E3C /* PeopleListView.swift */; };
 		9ABEE5A9058DF4C8E5EFF6DA /* AIBackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F591395AFF2D1783D481DB08 /* AIBackendManager.swift */; };
 		A248CD7AEEF79AC78A9D748F /* SSOWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C68E639237390DD679685A /* SSOWebView.swift */; };
+		AA11BB22CC33DD44EE55FF66 /* WidgetDataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF67 /* WidgetDataSync.swift */; };
 		AADC0EBE06B2EB8918C3F8FB /* JiraServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4107E6D2A9A5189EAB2545 /* JiraServerService.swift */; };
 		AB464EC964E0DB949CF24DA2 /* AddSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB1A3087F7C326347EF096 /* AddSystemView.swift */; };
 		ABD625B6AB4C084F3B573704 /* AIBackendStatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE316E40E2C38FFCD5F13 /* AIBackendStatusMenu.swift */; };
 		B49C91CA70D1BFC6296C4787 /* DataFetchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8D03091CCB6EA8B24BC62 /* DataFetchCoordinator.swift */; };
+		BB34FA139EC11D036281FFD1 /* NovaAPIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACBACF7F55E6BF5260DCF0D /* NovaAPIServer.swift */; };
 		C19E06A059FD2CAEAD4FB603 /* JiraModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9173E04FAA00BB152CE13924 /* JiraModels.swift */; };
 		CCF58E1E861319D8C13A0040 /* AISummaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63972915C7F99BBB5C74E660 /* AISummaryService.swift */; };
 		D5A2930A6026A95ADFFF85ED /* SystemsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FA776D3E8F84C2CEBACEC4 /* SystemsListView.swift */; };
@@ -45,11 +46,10 @@
 		F6C8EC7A40839CE7379A29E5 /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBE9AEFFFBD956543080D4A /* PersonDetailView.swift */; };
 		FB24F84B8C5F167B83CBD979 /* ModernDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D5886A997431FBE5BE4995 /* ModernDesign.swift */; };
 		FD271622149C64EE6EB310E2 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5474B20D5A99D1266C9BF5FD /* SidebarView.swift */; };
-		AA11BB22CC33DD44EE55FF66 /* WidgetDataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF67 /* WidgetDataSync.swift */; };
-		WGT_BF_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift */; };
-		WGT_BF_WDATA_SWIFT_12345 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_WDATA_SWIFT_12345 /* WidgetData.swift */; };
-		WGT_BF_SHARED_SWIFT_1234 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_SHARED_SWIFT_1234 /* SharedDataManager.swift */; };
 		WGT_BF_APPEX_EMBED_12345 /* JiraSummary Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = WGT_FR_APPEX_PRODUCT_123 /* JiraSummary Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		WGT_BF_SHARED_SWIFT_1234 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_SHARED_SWIFT_1234 /* SharedDataManager.swift */; };
+		WGT_BF_WDATA_SWIFT_12345 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_WDATA_SWIFT_12345 /* WidgetData.swift */; };
+		WGT_BF_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT_FR_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 9399050F5B905CE19EB503CA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = WGT_NATIVE_TARGET_123456 /* JiraSummary Widget */;
+			remoteGlobalIDString = WGT_NATIVE_TARGET_123456;
 			remoteInfo = "JiraSummary Widget";
 		};
 /* End PBXContainerItemProxy section */
@@ -95,6 +95,7 @@
 		6BFF52366800E8D6147C793C /* TicketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketListView.swift; sourceTree = "<group>"; };
 		73DE86BD8E553DC2CECEFE4F /* JiraSummaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSummaryApp.swift; sourceTree = "<group>"; };
 		79DC5A60880C8378D64E4A42 /* SprintData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintData.swift; sourceTree = "<group>"; };
+		7ACBACF7F55E6BF5260DCF0D /* NovaAPIServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NovaAPIServer.swift; sourceTree = "<absolute>"; };
 		80F8D03091CCB6EA8B24BC62 /* DataFetchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetchCoordinator.swift; sourceTree = "<group>"; };
 		8377A9D197BB64C9CD2E9EB6 /* SSOAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOAuthService.swift; sourceTree = "<group>"; };
 		8B032523828F3D8B8EC86C34 /* JiraCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraCloudService.swift; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 		9FEBBF59DAEC3F9634ABBA2F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A22C423047962F8C75F06A94 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		A530001E25E277F1B969D8C6 /* AzureDevOpsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDevOpsModels.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE55FF67 /* WidgetDataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataSync.swift; sourceTree = "<group>"; };
 		AFEC311549AAB873121C8885 /* AIBackendManager+Generation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIBackendManager+Generation.swift"; sourceTree = "<group>"; };
 		C4C2A9FF5DB2AAABC873A817 /* PersonSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSummary.swift; sourceTree = "<group>"; };
 		C6A3A2F1105D078BD659921E /* TrackedPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedPerson.swift; sourceTree = "<group>"; };
@@ -117,13 +119,12 @@
 		E3ECC71A0DB7BD83F4CA7E3C /* PeopleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		F0D5886A997431FBE5BE4995 /* ModernDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernDesign.swift; sourceTree = "<group>"; };
 		F591395AFF2D1783D481DB08 /* AIBackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBackendManager.swift; sourceTree = "<group>"; };
-		AA11BB22CC33DD44EE55FF67 /* WidgetDataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataSync.swift; sourceTree = "<group>"; };
-		WGT_FR_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSummaryWidget.swift; sourceTree = "<group>"; };
-		WGT_FR_WDATA_SWIFT_12345 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
-		WGT_FR_SHARED_SWIFT_1234 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
-		WGT_FR_INFO_PLIST_12345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		WGT_FR_ENTITLEMENTS_1234 /* JiraSummary_Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiraSummary_Widget.entitlements; sourceTree = "<group>"; };
 		WGT_FR_APPEX_PRODUCT_123 /* JiraSummary Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "JiraSummary Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		WGT_FR_ENTITLEMENTS_1234 /* JiraSummary_Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiraSummary_Widget.entitlements; sourceTree = "<group>"; };
+		WGT_FR_INFO_PLIST_12345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		WGT_FR_SHARED_SWIFT_1234 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
+		WGT_FR_WDATA_SWIFT_12345 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
+		WGT_FR_WIDGET_SWIFT_1234 /* JiraSummaryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraSummaryWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +260,7 @@
 				423C2F6901DA5AFE448EF383 /* Models */,
 				0BB029A5ADC33F3BE2D4F200 /* Services */,
 				C18F9029CD3B17DD65E159E1 /* Views */,
+				7ACBACF7F55E6BF5260DCF0D /* NovaAPIServer.swift */,
 			);
 			path = JiraSummary;
 			sourceTree = "<group>";
@@ -280,6 +282,16 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		EE20CECB2E5DD03844EFC5A2 = {
+			isa = PBXGroup;
+			children = (
+				DC17F7B8A1400966642F786D /* JiraSummary */,
+				WGT_GROUP_WIDGET_EXT_123 /* JiraSummary Widget */,
+				876CA105F785E3B3D73C2C01 /* Products */,
+				8ED26383A24BD51175FB9E15 /* AIBackend */,
+			);
+			sourceTree = "<group>";
+		};
 		WGT_GROUP_WIDGET_EXT_123 /* JiraSummary Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,16 +302,6 @@
 				WGT_FR_ENTITLEMENTS_1234 /* JiraSummary_Widget.entitlements */,
 			);
 			path = "JiraSummary Widget";
-			sourceTree = "<group>";
-		};
-		EE20CECB2E5DD03844EFC5A2 = {
-			isa = PBXGroup;
-			children = (
-				DC17F7B8A1400966642F786D /* JiraSummary */,
-				WGT_GROUP_WIDGET_EXT_123 /* JiraSummary Widget */,
-				876CA105F785E3B3D73C2C01 /* Products */,
-				8ED26383A24BD51175FB9E15 /* AIBackend */,
-			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,8 +441,8 @@
 				4C759FF497F8BD70C3EFAE8C /* TicketActivity.swift in Sources */,
 				6DE358832F034C6B81275479 /* TicketListView.swift in Sources */,
 				00CEBA1CE6648395F0E5DEA6 /* TrackedPerson.swift in Sources */,
-/* Removed: AIBackendManager+Enhanced.swift */
 				AA11BB22CC33DD44EE55FF66 /* WidgetDataSync.swift in Sources */,
+				BB34FA139EC11D036281FFD1 /* NovaAPIServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
