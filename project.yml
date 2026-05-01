@@ -36,6 +36,9 @@ targets:
         CODE_SIGNING_ALLOWED: false
     entitlements:
       path: JiraSummary/JiraSummary.entitlements
+      properties:
+        com.apple.security.app-sandbox: false
+        com.apple.security.network.client: true
 
   JiraSummaryTests:
     type: bundle.unit-test
