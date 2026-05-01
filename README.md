@@ -4,10 +4,11 @@
 ![Platform](https://img.shields.io/badge/platform-macOS%2014.0%2B-blue)
 ![Swift](https://img.shields.io/badge/Swift-5.9-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![Tests](https://img.shields.io/badge/tests-119%20passed-brightgreen)
 
 A native macOS application for tracking team activity across Jira Cloud, Jira Server/Data Center, and Azure DevOps -- all from a single dashboard. Built for engineering managers and tech leads who need weekly summaries, sprint velocity charts, and AI-generated insights without switching between three different browser tabs.
 
-**Version:** 1.1.0 | **Bundle ID:** com.jordankoch.JiraSummary
+**Version:** 1.2.0 | **Bundle ID:** com.jordankoch.JiraSummary
 
 ---
 
@@ -27,6 +28,7 @@ A native macOS application for tracking team activity across Jira Cloud, Jira Se
 - [Widget Extension](#widget-extension)
 - [Local HTTP API](#local-http-api)
 - [Project Structure](#project-structure)
+- [Testing](#testing)
 - [Security](#security)
 - [Troubleshooting](#troubleshooting)
 - [Building from Source](#building-from-source)
@@ -36,56 +38,70 @@ A native macOS application for tracking team activity across Jira Cloud, Jira Se
 
 ## Architecture
 
-```
-+-------------------------------------------------------------------------+
-|                          macOS Application                               |
-|                                                                         |
-|  +-----------------------------+   +--------------------------------+   |
-|  |        SwiftUI Views        |   |       Menu Bar Item            |   |
-|  |  Dashboard  | Systems       |   |  Completed / In Progress /     |   |
-|  |  People     | Activity      |   |  Blocked counts + Refresh      |   |
-|  |  Settings   | Detail Tabs   |   +--------------------------------+   |
-|  +-----------------------------+                                        |
-|         |            |                                                  |
-|         v            v                                                  |
-|  +-----------------------------+   +--------------------------------+   |
-|  |      Service Layer          |   |    AI Backend Manager          |   |
-|  |  (Swift Actors + async)     |   |  10 backends, auto-fallback   |   |
-|  |                             |   |                                |   |
-|  |  DataFetchCoordinator       |   |  Local:                       |   |
-|  |    +-- JiraCloudService     |   |    Ollama | MLX | TinyLLM     |   |
-|  |    +-- JiraServerService    |   |    TinyChat | OpenWebUI       |   |
-|  |    +-- AzureDevOpsService   |   |                                |   |
-|  |  SummaryEngine              |   |  Cloud:                       |   |
-|  |  SSOAuthService (WKWebView) |   |    OpenAI | Google | Azure    |   |
-|  |  MenuBarManager             |   |    AWS | IBM Watson            |   |
-|  +-----------------------------+   +--------------------------------+   |
-|         |            |                        |                         |
-|         v            v                        v                         |
-|  +-----------------------------+   +--------------------------------+   |
-|  |       Data Layer            |   |    AISummaryService            |   |
-|  |  DataStore (JSON files)     |   |  Prompt construction +         |   |
-|  |  KeychainService (macOS     |   |  natural language summaries    |   |
-|  |    Keychain credentials)    |   +--------------------------------+   |
-|  +-----------------------------+                                        |
-|         |                                                               |
-|         v                                                               |
-|  +-----------------------------+   +--------------------------------+   |
-|  |   Widget Data Sync          |   |   Nova API Server              |   |
-|  |   Shared JSON for widget    |   |   HTTP on 127.0.0.1:37433     |   |
-|  |   WidgetKit integration     |   |   /api/status  /api/ping      |   |
-|  +-----------------------------+   +--------------------------------+   |
-|                                                                         |
-+-------------------------------------------------------------------------+
-         |                    |                       |
-         v                    v                       v
-  +-----------+     +----------------+      +------------------+
-  | Jira Cloud|     | Jira Server /  |      | Azure DevOps     |
-  | REST v3   |     | Data Center    |      | REST 7.1         |
-  | (Atlassian|     | REST v2        |      | (WIQL queries,   |
-  |  Cloud)   |     | (On-premise)   |      |  work items,     |
-  |           |     |                |      |  iterations)     |
-  +-----------+     +----------------+      +------------------+
+```mermaid
+graph TB
+    subgraph App["macOS Application"]
+        subgraph UI["SwiftUI Views"]
+            Dashboard[Dashboard]
+            Systems[Systems]
+            People[People]
+            Activity[Activity]
+            Settings[Settings]
+        end
+
+        MenuBar["Menu Bar Item<br/>Completed / In Progress / Blocked"]
+
+        subgraph Services["Service Layer (Swift Actors + async)"]
+            DFC[DataFetchCoordinator]
+            JCS[JiraCloudService<br/>REST v3]
+            JSS[JiraServerService<br/>REST v2]
+            ADS[AzureDevOpsService<br/>REST 7.1]
+            SE[SummaryEngine]
+            SSO[SSOAuthService<br/>WKWebView]
+            MBM[MenuBarManager]
+        end
+
+        subgraph AI["AI Backend Manager (10 backends)"]
+            direction LR
+            Local["Local: Ollama, MLX,<br/>TinyLLM, TinyChat, OpenWebUI"]
+            Cloud["Cloud: OpenAI, Google,<br/>Azure, AWS, IBM Watson"]
+        end
+
+        AIS[AISummaryService<br/>Prompt construction]
+
+        subgraph Data["Data Layer"]
+            DS[DataStore<br/>JSON persistence]
+            KC[KeychainService<br/>macOS Keychain]
+        end
+
+        WDS[Widget Data Sync<br/>WidgetKit]
+        Nova[Nova API Server<br/>127.0.0.1:37433]
+    end
+
+    subgraph External["External Systems"]
+        JC["Jira Cloud<br/>(Atlassian)"]
+        JS["Jira Server /<br/>Data Center"]
+        AZ["Azure DevOps"]
+    end
+
+    UI --> Services
+    MenuBar --> MBM
+    DFC --> JCS & JSS & ADS
+    Services --> Data
+    AI --> AIS
+    AIS --> SE
+    Data --> WDS
+    JCS --> JC
+    JSS --> JS
+    ADS --> AZ
+    KC -.->|credentials| JCS & JSS & ADS
+
+    style App fill:#1a1a2e,stroke:#16213e,color:#e0e0e0
+    style UI fill:#0f3460,stroke:#533483,color:#e0e0e0
+    style Services fill:#16213e,stroke:#0f3460,color:#e0e0e0
+    style AI fill:#533483,stroke:#e94560,color:#e0e0e0
+    style Data fill:#1a1a2e,stroke:#0f3460,color:#e0e0e0
+    style External fill:#0d1117,stroke:#30363d,color:#c9d1d9
 ```
 
 **Key architectural decisions:**
@@ -334,7 +350,45 @@ JiraSummary/
 +-- JiraSummary.xcodeproj/                  Generated Xcode project
 ```
 
-**2 targets** | **44 Swift files** | **Zero external dependencies**
+**3 targets** | **52 Swift files** | **Zero external dependencies**
+
+---
+
+## Testing
+
+JiraSummary includes a comprehensive XCTest suite covering unit tests, functional tests, security tests, and integration tests.
+
+### Running Tests
+
+```bash
+xcodebuild test -project JiraSummary.xcodeproj -scheme JiraSummaryTests \
+  -configuration Debug -destination "platform=macOS"
+```
+
+### Test Coverage
+
+| Test Suite | Tests | Coverage Area |
+|-----------|-------|--------------|
+| **JiraModelTests** | 10 | Jira Cloud/Server REST API Codable parsing, search responses, sprints, boards, users, changelogs |
+| **AzureDevOpsModelTests** | 9 | Azure DevOps WIQL responses, work items, updates, iterations, team members, projects |
+| **TicketActivityTests** | 10 | TicketActivity creation, Codable round-trip, StatusTransition, Hashable conformance |
+| **PersonSummaryTests** | 15 | PersonSummary init, velocity percentage, completion rate, SummaryPeriod, edge cases (division by zero) |
+| **SprintDataTests** | 12 | SprintData init/Codable, SprintState, PersonSprintBreakdown, velocity calculations |
+| **SystemConnectionTests** | 12 | SystemType enum, SystemConnection init/Codable, AuthCredential types |
+| **TrackedPersonTests** | 5 | TrackedPerson init/Codable, unique ID generation, Hashable conformance |
+| **SummaryEngineTests** | 11 | Data aggregation, status recognition (done/progress/blocked), period filtering, story points, sprint velocity, recent activity limits |
+| **SecurityTests** | 14 | Keychain CRUD operations, API keys not in UserDefaults, error messages don't leak credentials, URL safety, loopback binding, cost estimation |
+| **IntegrationTests** | 8 | End-to-end JSON parsing pipelines (Jira Cloud, Azure DevOps), PersonSummary generation from raw data, malformed input handling |
+| **AIBackendTests** | 13 | AIBackend enum coverage, UsageStats, PerformanceMetrics, ConnectionTestResult, cost estimation |
+
+**Total: 119 tests across 11 test suites**
+
+### Test Philosophy
+
+- **Unit tests** verify each model's Codable conformance, computed properties, and edge cases
+- **Functional tests** verify the SummaryEngine aggregation logic with realistic data
+- **Security tests** verify Keychain usage, credential isolation from UserDefaults, and safe error messages
+- **Integration tests** simulate full data pipelines from raw JSON API responses through to PersonSummary output
 
 ---
 

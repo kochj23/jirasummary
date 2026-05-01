@@ -29,10 +29,24 @@ targets:
         PRODUCT_NAME: JiraSummary
         INFOPLIST_FILE: JiraSummary/Info.plist
         CODE_SIGN_ENTITLEMENTS: JiraSummary/JiraSummary.entitlements
-        MARKETING_VERSION: "1.0.0"
+        MARKETING_VERSION: "1.2.0"
         CURRENT_PROJECT_VERSION: "1"
         GENERATE_INFOPLIST_FILE: false
         ENABLE_HARDENED_RUNTIME: false
         CODE_SIGNING_ALLOWED: false
     entitlements:
       path: JiraSummary/JiraSummary.entitlements
+
+  JiraSummaryTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: JiraSummaryTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jordankoch.JiraSummaryTests
+        GENERATE_INFOPLIST_FILE: true
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/JiraSummary.app/Contents/MacOS/JiraSummary"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+    dependencies:
+      - target: JiraSummary
